@@ -56,6 +56,7 @@ open class BMPlayerControlView: UIView {
     open var selectedIndex = 0
     open var isFullscreen  = false
     open var isMaskShowing = true
+    open var isAlwaysShowCoverImage = false
     
     open var totalDuration: TimeInterval = 0
     open var delayItem: DispatchWorkItem?
@@ -327,7 +328,7 @@ open class BMPlayerControlView: UIView {
     }
     
     open func hideCoverImageView() {
-        self.maskImageView.isHidden = true
+        self.maskImageView.isHidden = !isAlwaysShowCoverImage
     }
     
     open func prepareChooseDefinitionView() {
