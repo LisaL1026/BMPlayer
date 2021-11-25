@@ -338,7 +338,7 @@ open class BMPlayerControlView: UIView {
     }
     
     open func hideCoverImageView() {
-        if isAwaysShowImageCover {
+        if !isAwaysShowImageCover {
             self.maskImageView.isHidden = true
         }
     }
