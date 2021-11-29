@@ -17,7 +17,7 @@ public let BMPlayerConf = BMPlayerManager.shared
 public enum BMPlayerTopBarShowCase: Int {
     case always         = 0
     case horizantalOnly = 1
-    case none           = 2 
+    case none           = 2
 }
 
 open class BMPlayerManager {
@@ -58,9 +58,8 @@ open class BMPlayerManager {
     }
     
     /**
-     打印log
      
-     - parameter info: log信息
+     - parameter info: log info
      */
     func log(_ info:String) {
         if allowLog {
