@@ -43,6 +43,18 @@ import NVActivityIndicatorView
      - parameter rate:        playback rate
      */
     @objc optional func controlView(controlView: BMPlayerControlView, didChangeVideoPlaybackRate rate: Float)
+    
+}
+
+// MARK: - Optional
+extension BMPlayerControlViewDelegate {
+    /**
+     call when mask view tapped.
+     
+     - parameter controlView:    control view
+     - parameter didTapMaskView: which view been tapped
+     */
+    func controlView(controlView: BMPlayerControlView, didTapMaskView: MaskViewType) { }
 }
 
 open class BMPlayerControlView: UIView {
@@ -117,6 +129,8 @@ open class BMPlayerControlView: UIView {
     /// Gesture used to show / hide control view
     open var tapGesture: UITapGestureRecognizer!
     open var doubleTapGesture: UITapGestureRecognizer!
+    open var mainMaskTapGesture: UITapGestureRecognizer!
+    open var bottomMaskTapGesture: UITapGestureRecognizer!
     
     // MARK: - handle player state change
     /**
@@ -415,6 +429,14 @@ open class BMPlayerControlView: UIView {
         }
     }
     
+    @objc open func onMainMaskTapGestureTapped(_ gesture: UITapGestureRecognizer) {
+        delegate?.controlView(controlView: self, didTapMaskView: .mainMaskView)
+    }
+    
+    @objc open func onBottomMaskTapGestureTapped(_ gesture: UITapGestureRecognizer) {
+        delegate?.controlView(controlView: self, didTapMaskView: .bottomMaskView)
+    }
+    
     // MARK: - handle UI slider actions
     @objc func progressSliderTouchBegan(_ sender: UISlider)  {
         delegate?.controlView(controlView: self, slider: sender, onSliderEvent: .touchDown)
@@ -603,6 +625,12 @@ open class BMPlayerControlView: UIView {
         
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(onTapGestureTapped(_:)))
         addGestureRecognizer(tapGesture)
+        
+        mainMaskTapGesture = UITapGestureRecognizer(target: self, action: #selector(onMainMaskTapGestureTapped(_:)))
+        mainMaskView.addGestureRecognizer(mainMaskTapGesture)
+        
+        bottomMaskTapGesture = UITapGestureRecognizer(target: self, action: #selector(onBottomMaskTapGestureTapped(_:)))
+        bottomMaskView.addGestureRecognizer(bottomMaskTapGesture)
         
         if BMPlayerManager.shared.enablePlayControlGestures {
             doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(onDoubleTapGestureRecognized(_:)))

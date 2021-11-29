@@ -9,6 +9,7 @@
 import UIKit
 
 extension BMPlayerControlView {
+    
     public enum ButtonType: Int {
         case play       = 101
         case pause      = 102
@@ -16,6 +17,13 @@ extension BMPlayerControlView {
         case fullscreen = 105
         case replay     = 106
     }
+    
+}
+
+public enum MaskViewType {
+    case mainMaskView
+    case topMaskView
+    case bottomMaskView
 }
 
 extension BMPlayer {
