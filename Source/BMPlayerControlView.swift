@@ -434,6 +434,7 @@ open class BMPlayerControlView: UIView {
     }
     
     @objc open func onBottomMaskTapGestureTapped(_ gesture: UITapGestureRecognizer) {
+        controlViewAnimation(isShow: !isMaskShowing)
         delegate?.controlView(controlView: self, didTapMaskView: .bottomMaskView)
     }
     
@@ -623,14 +624,16 @@ open class BMPlayerControlView: UIView {
         replayButton.addTarget(self, action: #selector(onButtonPressed(_:)), for: .touchUpInside)
         replayButton.tag = ButtonType.replay.rawValue
         
-        tapGesture = UITapGestureRecognizer(target: self, action: #selector(onTapGestureTapped(_:)))
-        addGestureRecognizer(tapGesture)
-        
-        mainMaskTapGesture = UITapGestureRecognizer(target: self, action: #selector(onMainMaskTapGestureTapped(_:)))
-        mainMaskView.addGestureRecognizer(mainMaskTapGesture)
-        
-        bottomMaskTapGesture = UITapGestureRecognizer(target: self, action: #selector(onBottomMaskTapGestureTapped(_:)))
-        bottomMaskView.addGestureRecognizer(bottomMaskTapGesture)
+        if BMPlayerManager.shared.enableCallbackMaskTapEvent {
+            mainMaskTapGesture = UITapGestureRecognizer(target: self, action: #selector(onMainMaskTapGestureTapped(_:)))
+            mainMaskView.addGestureRecognizer(mainMaskTapGesture)
+            
+            bottomMaskTapGesture = UITapGestureRecognizer(target: self, action: #selector(onBottomMaskTapGestureTapped(_:)))
+            bottomMaskView.addGestureRecognizer(bottomMaskTapGesture)
+        } else {
+            tapGesture = UITapGestureRecognizer(target: self, action: #selector(onTapGestureTapped(_:)))
+            addGestureRecognizer(tapGesture)
+        }
         
         if BMPlayerManager.shared.enablePlayControlGestures {
             doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(onDoubleTapGestureRecognized(_:)))

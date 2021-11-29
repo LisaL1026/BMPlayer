@@ -21,7 +21,7 @@ public enum BMPlayerTopBarShowCase: Int {
 }
 
 open class BMPlayerManager {
-    /// 单例
+    /// sigleton
     public static let shared = BMPlayerManager()
     
     /// tint color
@@ -46,6 +46,8 @@ open class BMPlayerManager {
     open var enablePlaytimeGestures = true
     open var enableChooseDefinition = true
     open var enablePlayControlGestures = true
+    
+    open var enableCallbackMaskTapEvent = false
 
     open var cacheManeger = VIResourceLoaderManager()
     
