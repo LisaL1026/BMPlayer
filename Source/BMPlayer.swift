@@ -121,13 +121,13 @@ open class BMPlayer: UIView {
         
         currentDefinition = definitionIndex
         controlView.prepareUI(for: resource, selectedIndex: definitionIndex)
+        controlView.showCover(url: resource.cover)
         
         if BMPlayerConf.shouldAutoPlay {
             isURLSet = true
             let asset = resource.definitions[definitionIndex]
             playerLayer?.playAsset(asset: asset.avURLAsset)
         } else {
-            controlView.showCover(url: resource.cover)
             controlView.hideLoader()
         }
     }
