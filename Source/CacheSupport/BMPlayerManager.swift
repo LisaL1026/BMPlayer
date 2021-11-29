@@ -15,9 +15,9 @@ import NVActivityIndicatorView
 public let BMPlayerConf = BMPlayerManager.shared
 
 public enum BMPlayerTopBarShowCase: Int {
-    case always         = 0 /// 始终显示
-    case horizantalOnly = 1 /// 只在横屏界面显示
-    case none           = 2 /// 不显示
+    case always         = 0
+    case horizantalOnly = 1
+    case none           = 2 
 }
 
 open class BMPlayerManager {
