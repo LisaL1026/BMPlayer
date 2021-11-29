@@ -461,7 +461,6 @@
 		038D5BED1E95182F404A2F488B7547EB /* CacheSupport */ = {
 			isa = PBXGroup;
 			children = (
-				78FC34689EB39CE39B854DE002B616DD /* BMPlayerManager.swift */,
 			);
 			name = CacheSupport;
 			path = Source/CacheSupport;
@@ -835,6 +834,7 @@
 				D429EF6281A42A1EF02EA40AC9CFD674 /* BMPlayerProtocols.swift */,
 				7A65B65C06CFEB0FF0704CEFE57D8359 /* BMSubtitles.swift */,
 				AC56C510F0CB6C19E144E75B57A57AA5 /* BMTimeSlider.swift */,
+				78FC34689EB39CE39B854DE002B616DD /* BMPlayerManager.swift */,
 				038D5BED1E95182F404A2F488B7547EB /* CacheSupport */,
 				3972152636BE2A3EA9034A017C41A07C /* Resources */,
 			);
@@ -1048,6 +1048,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
