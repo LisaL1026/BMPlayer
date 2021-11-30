@@ -397,6 +397,7 @@ open class BMPlayer: UIView {
         }
         
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.panDirection(_:)))
+        panGesture.delegate = self
         self.addGestureRecognizer(panGesture)
     }
     
@@ -423,6 +424,14 @@ open class BMPlayer: UIView {
         playerLayer!.delegate = self
         controlView.showLoader()
         self.layoutIfNeeded()
+    }
+}
+
+
+// MARK: - UIGestureRecognizerDelegate
+extension BMPlayer: UIGestureRecognizerDelegate {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }
 
