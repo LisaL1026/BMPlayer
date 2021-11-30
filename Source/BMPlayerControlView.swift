@@ -526,10 +526,10 @@ open class BMPlayerControlView: UIView {
         addSubview(subtitleBackView)
         
         // Main mask view
+        addSubview(maskImageView)
         addSubview(mainMaskView)
+        addSubview(bottomMaskView)
         mainMaskView.addSubview(topMaskView)
-        mainMaskView.addSubview(bottomMaskView)
-        mainMaskView.insertSubview(maskImageView, at: 0)
         mainMaskView.clipsToBounds = true
         mainMaskView.backgroundColor = UIColor(white: 0, alpha: 0.4 )
         
@@ -557,6 +557,7 @@ open class BMPlayerControlView: UIView {
         bottomWrapperView.addSubview(progressView)
         bottomWrapperView.addSubview(timeSlider)
         bottomWrapperView.addSubview(fullscreenButton)
+        bottomWrapperView.backgroundColor = UIColor(white: 0, alpha: 0.4 )
         
         playButton.tag = BMPlayerControlView.ButtonType.play.rawValue
         playButton.setImage(BMImageResourcePath("Pod_Asset_BMPlayer_play"),  for: .normal)
@@ -625,12 +626,12 @@ open class BMPlayerControlView: UIView {
         replayButton.tag = ButtonType.replay.rawValue
         
         if BMPlayerManager.shared.enableCallbackMaskTapEvent {
-            mainMaskTapGesture = UITapGestureRecognizer(target: self, action: #selector(onMainMaskTapGestureTapped(_:)))
-            mainMaskView.addGestureRecognizer(mainMaskTapGesture)
+            mainMaskView.isUserInteractionEnabled = false
             
             bottomMaskTapGesture = UITapGestureRecognizer(target: self, action: #selector(onBottomMaskTapGestureTapped(_:)))
             bottomMaskView.addGestureRecognizer(bottomMaskTapGesture)
         } else {
+            mainMaskView.isUserInteractionEnabled = true
             tapGesture = UITapGestureRecognizer(target: self, action: #selector(onTapGestureTapped(_:)))
             addGestureRecognizer(tapGesture)
         }
@@ -647,11 +648,11 @@ open class BMPlayerControlView: UIView {
     func addSnapKitConstraint() {
         // Main mask view
         mainMaskView.snp.makeConstraints { (make) in
-            make.edges.equalTo(self)
+            make.top.left.right.equalTo(self)
         }
         
         maskImageView.snp.makeConstraints { (make) in
-            make.edges.equalTo(mainMaskView)
+            make.edges.equalTo(self)
         }
         
         topMaskView.snp.makeConstraints { (make) in
@@ -671,7 +672,9 @@ open class BMPlayerControlView: UIView {
         }
         
         bottomMaskView.snp.makeConstraints { (make) in
-            make.bottom.left.right.equalTo(mainMaskView)
+            make.height.equalTo(50)
+            make.top.equalTo(mainMaskView.snp.bottom)
+            make.bottom.left.right.equalTo(self)
         }
         
         bottomWrapperView.snp.makeConstraints { (make) in
