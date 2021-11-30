@@ -246,7 +246,7 @@ open class BMPlayerControlView: UIView {
      - parameter isShow: is to show the controlview
      */
     open func controlViewAnimation(isShow: Bool) {
-        let alpha: CGFloat = isShow ? 1.0 : 0.0
+        let alpha: CGFloat = isShow ? 1.0 : 0.011
         self.isMaskShowing = isShow
         
         UIApplication.shared.setStatusBarHidden(!isShow, with: .fade)
