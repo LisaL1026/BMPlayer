@@ -685,7 +685,7 @@ open class BMPlayerControlView: UIView {
             }
         }
         
-        // Top views
+        // Top views mask.
         backButton.snp.makeConstraints { (make) in
             make.width.height.equalTo(50)
             make.left.bottom.equalToSuperview()
