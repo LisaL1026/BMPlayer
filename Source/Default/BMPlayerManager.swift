@@ -13,9 +13,9 @@ import NVActivityIndicatorView
 public let BMPlayerConf = BMPlayerManager.shared
 
 public enum BMPlayerTopBarShowCase: Int {
-    case always         = 0 /// 始终显示
-    case horizantalOnly = 1 /// 只在横屏界面显示
-    case none           = 2 /// 不显示
+    case always         = 0
+    case horizantalOnly = 1
+    case none           = 2
 }
 
 open class BMPlayerManager {
@@ -43,6 +43,7 @@ open class BMPlayerManager {
     open var enableVolumeGestures = true
     open var enablePlaytimeGestures = true
     open var enablePlayControlGestures = true
+    open var enableCallbackMaskTapEvent = false
     
     open var enableChooseDefinition = true
     
@@ -51,9 +52,9 @@ open class BMPlayerManager {
     }
     
     /**
-     打印log
+     print log
      
-     - parameter info: log信息
+     - parameter info: log info
      */
     func log(_ info:String) {
         if allowLog {
