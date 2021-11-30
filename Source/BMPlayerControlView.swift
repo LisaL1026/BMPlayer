@@ -659,6 +659,11 @@ open class BMPlayerControlView: UIView {
             make.height.equalTo(50)
             make.top.equalTo(mainMaskView.snp.bottom)
             make.bottom.left.right.equalTo(self)
+            if #available(iOS 11.0, *) {
+                make.bottom.left.right.equalTo(self.safeAreaLayoutGuide)
+            } else {
+                make.bottom.left.right.equalToSuperview().offset(15)
+            }
         }
         
         bottomWrapperView.snp.makeConstraints { (make) in
