@@ -46,17 +46,6 @@ import NVActivityIndicatorView
     
 }
 
-// MARK: - Optional
-extension BMPlayerControlViewDelegate {
-    /**
-     call when mask view tapped.
-     
-     - parameter controlView:    control view
-     - parameter didTapMaskView: which view been tapped
-     */
-    func controlView(controlView: BMPlayerControlView, didTapMaskView: MaskViewType) { }
-}
-
 open class BMPlayerControlView: UIView {
     
     open weak var delegate: BMPlayerControlViewDelegate?
@@ -429,13 +418,8 @@ open class BMPlayerControlView: UIView {
         }
     }
     
-    @objc open func onMainMaskTapGestureTapped(_ gesture: UITapGestureRecognizer) {
-        delegate?.controlView(controlView: self, didTapMaskView: .mainMaskView)
-    }
-    
     @objc open func onBottomMaskTapGestureTapped(_ gesture: UITapGestureRecognizer) {
         controlViewAnimation(isShow: !isMaskShowing)
-        delegate?.controlView(controlView: self, didTapMaskView: .bottomMaskView)
     }
     
     // MARK: - handle UI slider actions
