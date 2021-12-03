@@ -169,6 +169,11 @@ open class BMPlayer: UIView {
         isPauseByUser = !allow
     }
     
+    open func restart() {
+        playerLayer?.pause()
+        playerLayer?.seek(to: 0, completion: nil)
+    }
+    
     /**
      seek
      
@@ -539,7 +544,14 @@ extension BMPlayer: BMPlayerControlViewDelegate {
                 
             case .fullscreen:
                 fullScreenButtonPressed()
-                
+            case .post:
+                if isPlayToTheEnd {
+                    isPlayToTheEnd = false
+                    restart()
+                } else {
+                    isPlayToTheEnd = true
+                    play()
+                }
             default:
                 print("[Error] unhandled Action")
             }
