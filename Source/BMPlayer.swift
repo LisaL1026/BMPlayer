@@ -137,7 +137,7 @@ open class BMPlayer: UIView {
      */
     open func autoPlay() {
         if !isPauseByUser && isURLSet && !isPlayToTheEnd {
-            play()
+//            play()
         }
     }
     
@@ -280,7 +280,9 @@ open class BMPlayer: UIView {
                 if isPlayToTheEnd {
                     isPlayToTheEnd = false
                     seek(self.sumTime, completion: {
-                        self.play()
+//                        self.play()
+                        self.restart()
+                        
                     })
                 } else {
                     seek(self.sumTime, completion: {
