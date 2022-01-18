@@ -170,6 +170,7 @@ open class BMPlayer: UIView {
     }
     
     open func restart() {
+        isPauseByUser = true
         playerLayer?.pause()
         playerLayer?.seek(to: 0, completion: nil)
     }
