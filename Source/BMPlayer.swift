@@ -362,10 +362,7 @@ open class BMPlayer: UIView {
         if let customControlView = storyBoardCustomControl() {
             self.customControlView = customControlView
         }
-        initUI()
-        initUIData()
-        configureVolume()
-        preparePlayer()
+        initFuncs()
     }
     
     @available(*, deprecated:3.0, message:"Use newer init(customControlView:_)")
@@ -373,17 +370,27 @@ open class BMPlayer: UIView {
         self.init(customControlView: customControllView)
     }
     
-    public init(customControlView: BMPlayerControlView?) {
-        super.init(frame:CGRect.zero)
+    public init(frame: CGRect = .zero, customControlView: BMPlayerControlView?) {
+        super.init(frame: frame)
         self.customControlView = customControlView
-        initUI()
-        initUIData()
-        configureVolume()
-        preparePlayer()
+        initFuncs()
     }
     
     public convenience init() {
         self.init(customControlView:nil)
+    }
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.customControlView = nil
+        initFuncs()
+    }
+    
+    func initFuncs() {
+        initUI()
+        initUIData()
+        configureVolume()
+        preparePlayer()
     }
     
     // MARK: - 初始化
