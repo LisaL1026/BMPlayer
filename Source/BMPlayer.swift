@@ -432,7 +432,11 @@ open class BMPlayer: UIView {
     fileprivate func preparePlayer() {
         playerLayer = BMPlayerLayerView()
         playerLayer!.videoGravity = videoGravity
-        insertSubview(playerLayer!, at: 0)
+        
+        // prevent screenshot
+        insertSubview(textField, at: 0)
+        textField.subviews.first?.addSubview(playerLayer!)
+        
         playerLayer!.snp.makeConstraints { (make) in
             make.edges.equalTo(self)
         }
@@ -440,6 +444,20 @@ open class BMPlayer: UIView {
         controlView.showLoader()
         self.layoutIfNeeded()
     }
+    
+    private lazy var textField: UITextField = {
+        let textfield = UITextField()
+        textfield.isUserInteractionEnabled = false
+        textfield.isSecureTextEntry = true
+        DispatchQueue.main.async {
+            textfield.frame = self.bounds
+            textfield.autoresizingMask = [
+                .flexibleWidth,
+                .flexibleHeight
+            ]
+        }
+        return textfield
+    }()
 }
 
 

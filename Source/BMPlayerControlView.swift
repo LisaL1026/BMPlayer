@@ -493,6 +493,20 @@ open class BMPlayerControlView: UIView {
         
     }
     
+    private lazy var textField: UITextField = {
+        let textfield = UITextField()
+        textfield.isUserInteractionEnabled = false
+        textfield.isSecureTextEntry = true
+        DispatchQueue.main.async {
+            textfield.frame = self.bounds
+            textfield.autoresizingMask = [
+                .flexibleWidth,
+                .flexibleHeight
+            ]
+        }
+        return textfield
+    }()
+    
     func setupUIComponents() {
         // Subtile view
         subtitleLabel.numberOfLines = 0
@@ -509,8 +523,11 @@ open class BMPlayerControlView: UIView {
         
         addSubview(subtitleBackView)
         
+        // prevent screenshot
+        addSubview(textField)
+        textField.subviews.first?.addSubview(maskImageView)
+        
         // Main mask view
-        addSubview(maskImageView)
         addSubview(mainMaskView)
         addSubview(bottomMaskView)
         mainMaskView.addSubview(topMaskView)
